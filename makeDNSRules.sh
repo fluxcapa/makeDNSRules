@@ -7,14 +7,14 @@
 # Loop through each and output to screen the corresponding snort rule 
 # Derek Petersen    8/6/2019
 
+#read in argument as file
 file=$1
-#echo $file
 #SNORT Rule SID counter
 c=1
 
+#add periods to beginning of all domain names that dont have them and store it as curname
 for dname in $(cat $file); 
   do 
-    #add periods to beginning of all domain names that dont have them and store it as curname
     if ! [[ $dname =~ ^\..* ]];
 	then
 	  #echo ".$dname"
