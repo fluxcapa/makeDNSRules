@@ -15,10 +15,10 @@ c=1
 #add periods to beginning of all domain names that dont have them and store it as curname
 for dname in $(cat $file); 
   do 
-    if ! [[ $dname =~ ^\..* ]];
+    if [[ $dname =~ ^\..* ]];
 	then
 	  #echo ".$dname"
-	  curname=".$dname"
+	  curname=$(echo $dname | cut -c 1-)
         else 
 	  #echo $dname
 	  curname=$dname
@@ -35,7 +35,7 @@ for dname in $(cat $file);
 	    finalname+=$(echo -e "|$dnschar|$i")
 	  done
 	done <<< $curname
-	cleanname=$(echo "$finalname|00|" | cut -c 5-)
-	echo "alert udp any any <> any any (msg:\"APT1 DNS $cleanname\"; content: \"$cleanname\"; sid:500000$c;)"
+	cleanname=$(echo "$finalname|00|")
+	echo "alert udp any any <> any any (msg:\"DNS $cleanname\"; content: \"$cleanname\"; sid:500000$c;)"
 	let "c++"
 done
