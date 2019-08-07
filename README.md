@@ -1,5 +1,5 @@
 # makeDNSRules
-Given a list of domain names, this BASH script will return Snort Rules looking for those domains in DNS queries.
+Given a list of domain names, this BASH script will return Snort Rules looking for those domains in DNS queries. Use "sed -i -e 's/\r$//'" to remove carriage returns if copying from windows.
 
 syntax:
 ```
